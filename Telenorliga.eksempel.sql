@@ -52,7 +52,7 @@ where lagnavn = "Refu5ed";
 
 select *
 from lag
-order by `Poeng` desc;
+order by `Poeng` desc, `differanse` desc;
 
 select *
 from spiller
