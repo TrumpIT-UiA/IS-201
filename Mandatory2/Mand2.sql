@@ -236,3 +236,21 @@ group by Product.ProductID asc
 order by TotalSum desc
 limit 3;
 
+# Oppgave 4c
+create or replace view OrderCost as
+select Customer.first_name, Customer.last_name, Product.name, OrderLine.Quantity, Invoice.Amount
+from Customer, Product, OrderLine, `Order`, Invoice
+where Customer.CustomerID = `Order`.CustomerID and `Order`.orderid = OrderLine.orderID and OrderLine.ProductID = Product.ProductID
+and `Order`.InvoiceID = Invoice.InvoiceID;
+
+# Oppgave 4d
+select LEFT(Product.name, 10), Product.Stock -(Product.ReorderLevel)
+from Product
+where left(Product.name, 10) like "%EN%";
+
+# Oppgave 4e
+select Customer.First_Name, Customer.Last_Name, Invoice.InvoiceID, Invoice.Amount
+from Customer
+inner join `Order` on Customer.CustomerID = `Order`.CustomerID
+inner join `Invoice` on `Order`.InvoiceID = Invoice.InvoiceID
+order by OrderID asc;
